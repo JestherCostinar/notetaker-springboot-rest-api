@@ -77,4 +77,15 @@ public class NoteServiceImpl implements NoteService {
 
         return modelMapper.map(updatedNote, NoteDto.class);
     }
+
+    @Override
+    public NoteDto isNoteUnHide(Long id) {
+        Note note = noteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id + " not found"));
+
+        note.setHidden(Boolean.FALSE);
+        Note updatedNote = noteRepository.save(note);
+
+        return modelMapper.map(updatedNote, NoteDto.class);
+    }
 }

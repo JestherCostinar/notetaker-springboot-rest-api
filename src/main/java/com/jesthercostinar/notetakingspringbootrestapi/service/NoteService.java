@@ -17,4 +17,6 @@ public interface NoteService {
     void deleteNote(Long id);
 
     NoteDto isNoteHidden(Long id);
+
+    NoteDto isNoteUnHide(Long id);
 }

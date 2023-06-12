@@ -59,4 +59,11 @@ public class NoteController {
 
         return ResponseEntity.ok(note);
     }
+
+    @PatchMapping("{id}/unhide")
+    public ResponseEntity<NoteDto> unhideNote(@PathVariable Long id) {
+        NoteDto note = noteService.isNoteUnHide(id);
+
+        return ResponseEntity.ok(note);
+    }
 }
