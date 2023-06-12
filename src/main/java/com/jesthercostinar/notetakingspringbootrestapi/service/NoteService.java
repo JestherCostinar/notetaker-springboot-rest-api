@@ -13,4 +13,6 @@ public interface NoteService {
     NoteDto getNote(Long id);
 
     NoteDto updateNote(NoteDto noteDto, Long id);
+
+    void deleteNote(Long id);
 }
