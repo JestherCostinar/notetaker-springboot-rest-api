@@ -52,4 +52,11 @@ public class NoteController {
 
         return ResponseEntity.ok("Note with id: " + id + " has been deleted");
     }
+
+    @PatchMapping("{id}/hide")
+    public ResponseEntity<NoteDto> hideNote(@PathVariable Long id) {
+        NoteDto note = noteService.isNoteHidden(id);
+
+        return ResponseEntity.ok(note);
+    }
 }

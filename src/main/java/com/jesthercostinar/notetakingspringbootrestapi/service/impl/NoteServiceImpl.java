@@ -66,4 +66,15 @@ public class NoteServiceImpl implements NoteService {
                         .orElseThrow(() -> new ResourceNotFoundException(id + " not found"));
         noteRepository.deleteById(note.getId());
     }
+
+    @Override
+    public NoteDto isNoteHidden(Long id) {
+        Note note = noteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id + " not found"));
+
+        note.setHidden(Boolean.TRUE);
+        Note updatedNote = noteRepository.save(note);
+
+        return modelMapper.map(updatedNote, NoteDto.class);
+    }
 }
