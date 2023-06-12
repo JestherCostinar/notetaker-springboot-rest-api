@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class NoteServiceImpl implements NoteService {
@@ -24,5 +27,12 @@ public class NoteServiceImpl implements NoteService {
         NoteDto saveNoteDto = modelMapper.map(saveNote, NoteDto.class);
 
         return saveNoteDto;
+    }
+
+    @Override
+    public List<NoteDto> getAllNotes() {
+        List<Note> notes = noteRepository.findAll();
+
+        return notes.stream().map(note -> modelMapper.map(note, NoteDto.class)).collect(Collectors.toList());
     }
 }

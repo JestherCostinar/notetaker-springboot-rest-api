@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/notes")
 @AllArgsConstructor
@@ -23,7 +25,9 @@ public class NoteController {
     }
 
     @GetMapping
-    public ResponseEntity<String> hello() {
-        return ResponseEntity.ok("hello");
+    public ResponseEntity<List<NoteDto>> getAllNotes() {
+        List<NoteDto> notes = noteService.getAllNotes();
+
+        return ResponseEntity.ok(notes);
     }
 }
