@@ -2,6 +2,7 @@ package com.jesthercostinar.notetakingspringbootrestapi.service.impl;
 
 import com.jesthercostinar.notetakingspringbootrestapi.dto.NoteDto;
 import com.jesthercostinar.notetakingspringbootrestapi.entity.Note;
+import com.jesthercostinar.notetakingspringbootrestapi.exception.ResourceNotFoundException;
 import com.jesthercostinar.notetakingspringbootrestapi.repository.NoteRepository;
 import com.jesthercostinar.notetakingspringbootrestapi.service.NoteService;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,5 +36,13 @@ public class NoteServiceImpl implements NoteService {
         List<Note> notes = noteRepository.findAll();
 
         return notes.stream().map(note -> modelMapper.map(note, NoteDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public NoteDto getNote(Long id) {
+        Note note = noteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Note of id: " + id + " is not found"));
+
+        return modelMapper.map(note, NoteDto.class);
     }
 }

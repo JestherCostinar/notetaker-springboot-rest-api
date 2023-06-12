@@ -30,4 +30,11 @@ public class NoteController {
 
         return ResponseEntity.ok(notes);
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<NoteDto> getNoteById(@PathVariable Long id) {
+        NoteDto note = noteService.getNote(id);
+
+        return ResponseEntity.ok(note);
+    }
 }

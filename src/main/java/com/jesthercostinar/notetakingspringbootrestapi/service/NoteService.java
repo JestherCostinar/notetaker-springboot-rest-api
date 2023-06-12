@@ -8,4 +8,6 @@ public interface NoteService {
     NoteDto createNote(NoteDto noteDto);
 
     List<NoteDto> getAllNotes();
+
+    NoteDto getNote(Long id);
 }
